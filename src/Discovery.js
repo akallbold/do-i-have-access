@@ -22,7 +22,7 @@ export default function Discovery() {
           setData(error);
         });
     } else {
-      alert(
+      console.log(
         "If you perform this action without logging in you are checking if this resource is Public. Just plug in the URL in your browser, it's easier and I don't need to write additional logic :)  If you want to see if your specific webId has access than login"
       );
     }
