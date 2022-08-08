@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { LogoutButton, useSession } from "@inrupt/solid-ui-react";
-import { Navbar, NavbarBrand, NavbarText } from "reactstrap";
-import { login, logout } from "@inrupt/solid-client-authn-browser";
+import React from "react";
+import { useSession } from "@inrupt/solid-ui-react";
+import { Navbar, NavbarText } from "reactstrap";
 
-function UserDetails(props) {
+function UserDetails() {
   const { session } = useSession();
 
   return (
