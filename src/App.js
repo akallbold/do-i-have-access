@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Discovery from "./Discovery";
 import UserDetails from "./UserDetails";
