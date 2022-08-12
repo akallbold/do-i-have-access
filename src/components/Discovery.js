@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { fetch } from "@inrupt/solid-client-authn-browser";
 import { Row, Container, Input } from "reactstrap";
 import { useSession } from "@inrupt/solid-ui-react";
+import useResource from "../hooks/useResource";
 
 export default function Discovery() {
   const [inputText, setInputText] = useState("");
-  const [data, setData] = useState("");
   const { session } = useSession();
+  const { setResourceIri, resourceData, setResourceData, setError } =
+    useResource();
 
   const performGet = async (url) => {
+    setResourceIri(url);
     if (session.info.isLoggedIn) {
       fetch(url, {
         method: "GET",
@@ -16,10 +19,10 @@ export default function Discovery() {
       })
         .then((response) => response.text())
         .then((d) => {
-          setData(d);
+          setResourceData(d);
         })
         .catch((error) => {
-          setData(error);
+          setError(error);
         });
     } else {
       console.log(
@@ -62,7 +65,7 @@ export default function Discovery() {
           <textarea
             id="discovery-response-body"
             className="code-font"
-            value={data}
+            value={resourceData}
             readOnly
             style={{ width: "100%" }}
           />

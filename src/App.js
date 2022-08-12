@@ -1,6 +1,7 @@
+import Discovery from "./components/Discovery";
+import APIButtons from "./APIButtons";
+import UserDetails from "./components/UserDetails";
 import "./App.css";
-import Discovery from "./Discovery";
-import UserDetails from "./UserDetails";
 
 function App() {
   return (
@@ -8,14 +9,7 @@ function App() {
       <header className="App-header">
         <UserDetails style={{ width: "90vw" }} />
         <Discovery style={{ width: "90vw" }} />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <APIButtons />
       </header>
     </div>
   );
