@@ -1,7 +1,9 @@
 import Discovery from "./components/Discovery";
-import APIButtons from "./APIButtons";
+// import APIButtons from "./APIButtons";
 import UserDetails from "./components/UserDetails";
 import "./App.css";
+import NewPod from "./components/NewPod";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -9,7 +11,9 @@ function App() {
       <header className="App-header">
         <UserDetails style={{ width: "90vw" }} />
         <Discovery style={{ width: "90vw" }} />
-        <APIButtons />
+        {/* <APIButtons /> */}
+        <NewPod />
+        <UserProfile />
       </header>
     </div>
   );

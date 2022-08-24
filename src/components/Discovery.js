@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { fetch } from "@inrupt/solid-client-authn-browser";
 import { Row, Container, Input } from "reactstrap";
 import { useSession } from "@inrupt/solid-ui-react";
+// import { overwriteFile } from "@inrupt/solid-client";
 import useResource from "../hooks/useResource";
 
 export default function Discovery() {
-  const [inputText, setInputText] = useState("");
   const { session } = useSession();
-  const { setResourceIri, resourceData, setResourceData, setError } =
-    useResource();
+  const {
+    resourceIri,
+    setResourceIri,
+    resourceData,
+    setResourceData,
+    setError,
+  } = useResource();
+  // const [editing, setEditing] = useState(false);
+  const [textEdit] = useState(resourceData);
 
-  const performGet = async (url) => {
-    setResourceIri(url);
+  const performGet = async () => {
     if (session.info.isLoggedIn) {
-      fetch(url, {
+      fetch(resourceIri, {
         method: "GET",
         headers: { Accept: "text/turtle, application/json" },
       })
@@ -31,6 +37,22 @@ export default function Discovery() {
     }
   };
 
+  // const updateContent = async () => {
+  //   try {
+  //     await overwriteFile(resourceIri, textEdit, {
+  //       // contentType: "application/",
+  //       fetch,
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  // const handleSave = () => {
+  //   setEditing(false);
+  //   updateContent();
+  // };
+
   return (
     <Container style={{ width: "90%" }}>
       <div className="d-grid gap-1">
@@ -45,15 +67,15 @@ export default function Discovery() {
           <Input
             type="url"
             placeholder="Type your URL here"
-            value={inputText}
+            value={resourceIri}
             id="discovery-input"
             onChange={(e) => {
-              setInputText(e.target.value);
+              setResourceIri(e.target.value);
             }}
             style={{ width: "100%", marginRight: "10px" }}
           />
           <button
-            onClick={() => performGet(inputText)}
+            onClick={performGet}
             id="discovery-button"
             type="button"
             className="btn btn-primary"
@@ -65,10 +87,28 @@ export default function Discovery() {
           <textarea
             id="discovery-response-body"
             className="code-font"
-            value={resourceData}
+            value={textEdit}
             readOnly
+            // readOnly={!editing}
             style={{ width: "100%" }}
+            // onChange={(e) => setTextEdit(e.target.value)}
           />
+
+          {/* {editing ? (
+            <>
+              <button type="button" onClick={handleSave}>
+                Save
+              </button>
+
+              <button type="button" onClick={setEditing(false)}>
+                Cancel
+              </button>
+            </>
+          ) : (
+            <button type="button" onClick={setEditing(true)}>
+              Edit Mode
+            </button>
+          )} */}
         </Row>
       </div>
     </Container>
